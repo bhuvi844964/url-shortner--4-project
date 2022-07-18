@@ -17,7 +17,7 @@ const shortUrl = async function (req, res) {
         
         if (!isValid(req.body.longUrl))return res.status(400).send({ status: false, message: "Please provide Long URL." });
         
-        if (!/^(http(s)?:\/\/)?(www.)?([a-zA-Z0-9])+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,5}(:[0-9]{1,5})?(\/[^\s]*)?$/gm.test(req.body.longUrl.toString().trim())){ /*URL validation*/
+        if (!/^(http(s)?:\/\/)?(www.)?([a-zA-Z0-9])+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,5}(:[0-9]{1,5})?(\/[^\s]*)?$/gm.test(req.body.longUrl.toString().trim())){ 
             return res.status(400).send({ status: false, message: "Please Provide a Valid Long URL." })}
 
         const checkLongUrl = await urlModel.findOne({ longUrl: req.body.longUrl }).select({ createdAt: 0, updatedAt: 0, __v: 0, _id: 0 });
@@ -66,3 +66,7 @@ const originalUrl = async function (req, res) {
 
 
 module.exports = { shortUrl,originalUrl}
+
+
+
+
